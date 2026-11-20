@@ -233,6 +233,16 @@
   });
 
   /**
+   * "결제하기" 버튼 클릭 시 결제 화면(pay.html)으로 이동합니다.
+   */
+  payButton.addEventListener('click', function () {
+    if (window.ProductCart.getItems().length === 0) {
+      return;
+    }
+    window.location.href = 'pay.html';
+  });
+
+  /**
    * 모델/카메라 준비 상태가 바뀔 때 안내 문구를 갱신합니다.
    */
   function handleStatusChange(statusKey, message) {

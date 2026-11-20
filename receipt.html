@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>결제 완료 - 몽글 마트 무인 계산대</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- 공통 상단 헤더 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand-link" href="index.html">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span>몽글 마트</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="main-container center-main">
+    <!-- 결제 내역 없이 바로 들어왔을 때 보여줄 안내 카드 -->
+    <section id="emptyReceiptCard" class="kiosk-card empty-state-card" hidden>
+      <h1 class="empty-state-title">주문 내역이 없어요</h1>
+      <p class="empty-state-desc">시작 화면에서 상품 계산을 진행해 주세요.</p>
+      <a class="btn-primary" href="index.html">시작 화면으로 가기</a>
+    </section>
+
+    <!-- 결제 완료 및 영수증 카드 -->
+    <section id="receiptCard" class="kiosk-card receipt-card" hidden>
+      <div class="receipt-top">
+        <span class="receipt-check-badge" aria-hidden="true">✓</span>
+        <h1 class="receipt-title">결제가 완료되었습니다</h1>
+      </div>
+
+      <div class="receipt-paper">
+        <div class="receipt-meta-list">
+          <div class="receipt-meta-row">
+            <span class="receipt-meta-label">주문 번호</span>
+            <strong id="receiptOrderNumber" class="receipt-meta-value">-</strong>
+          </div>
+          <div class="receipt-meta-row">
+            <span class="receipt-meta-label">결제 시각</span>
+            <span id="receiptPaidAt" class="receipt-meta-value">-</span>
+          </div>
+          <div class="receipt-meta-row">
+            <span class="receipt-meta-label">결제 수단</span>
+            <span id="receiptMethod" class="receipt-meta-value">-</span>
+          </div>
+        </div>
+
+        <hr class="receipt-divider" />
+
+        <h2 class="section-title">주문 내역</h2>
+        <ul id="receiptItemList" class="order-item-list"></ul>
+
+        <hr class="receipt-divider" />
+
+        <div class="cart-total-row">
+          <span class="cart-total-label">합계</span>
+          <span id="receiptTotalAmount" class="order-total-amount">0원</span>
+        </div>
+      </div>
+
+      <button id="newOrderBtn" type="button" class="btn-primary receipt-new-btn">새 주문 시작</button>
+    </section>
+
+    <p class="footer-notice receipt-notice">실습용 화면입니다. 실제 결제는 이루어지지 않았습니다.</p>
+  </main>
+
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/receipt.js"></script>
+</body>
+</html>
