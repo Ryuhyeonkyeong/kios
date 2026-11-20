@@ -70,6 +70,47 @@
   }
 
   /**
+   * 특정 상품의 수량을 변경합니다. (예: +1 또는 -1)
+   * 수량이 0 이하가 되면 장바구니에서 해당 줄을 삭제합니다.
+   * @param {string} className 상품의 클래스 이름
+   * @param {number} delta 변경할 수량 (+1, -1 등)
+   * @returns {Array} 갱신된 장바구니 목록
+   */
+  function changeQuantity(className, delta) {
+    const items = loadItems();
+    const index = items.findIndex(function (item) {
+      return item.className === className;
+    });
+
+    if (index === -1) {
+      return items;
+    }
+
+    const nextQuantity = items[index].quantity + delta;
+    if (nextQuantity <= 0) {
+      items.splice(index, 1);
+    } else {
+      items[index].quantity = nextQuantity;
+    }
+
+    saveItems(items);
+    return items;
+  }
+
+  /**
+   * 장바구니에서 특정 상품 줄을 바로 삭제합니다.
+   * @param {string} className 상품의 클래스 이름
+   * @returns {Array} 갱신된 장바구니 목록
+   */
+  function removeItem(className) {
+    const items = loadItems().filter(function (item) {
+      return item.className !== className;
+    });
+    saveItems(items);
+    return items;
+  }
+
+  /**
    * 현재 장바구니 목록을 반환합니다.
    */
   function getItems() {
@@ -104,6 +145,8 @@
   global.ProductCart = {
     getItems: getItems,
     addItem: addItem,
+    changeQuantity: changeQuantity,
+    removeItem: removeItem,
     getTotalCount: getTotalCount,
     getTotalPrice: getTotalPrice,
     clear: clear

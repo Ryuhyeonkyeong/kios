@@ -39,11 +39,19 @@
         <div id="scanStatusLine" class="scan-status-line" data-state="idle" role="status" aria-live="polite">
           모델 불러오는 중...
         </div>
+        <!-- 인식이 잘 안 되는 상품을 손으로 담을 수 있는 직접 담기 목록 -->
+        <div class="quick-add-section">
+          <h2 class="quick-add-title">직접 담기</h2>
+          <div id="quickAddGrid" class="quick-add-grid"></div>
+        </div>
       </section>
 
       <!-- 오른쪽: 장바구니 영역 -->
       <section class="kiosk-card cart-card" aria-label="장바구니">
-        <h2 class="card-title">장바구니</h2>
+        <div class="cart-header">
+          <h2 class="card-title">장바구니</h2>
+          <button id="clearCartBtn" type="button" class="btn-clear-cart" hidden>전체 비우기</button>
+        </div>
         <div id="cartBody" class="cart-body">
           <p id="cartEmptyText" class="cart-empty-text">아직 담은 상품이 없어요</p>
           <ul id="cartList" class="cart-list" hidden></ul>
