@@ -1,3 +1,23 @@
+/* ==========================================================================
+   Tina' 마트 무인 계산대 공통 스타일 (밝고 깨끗한 키오스크 테마)
+   ========================================================================== */
+:root {
+  --bg-page: #f4f7fb;
+  --bg-card: #ffffff;
+  --bg-soft: #f8fafc;
+  --text-main: #0f172a;
+  --text-sub: #475569;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --accent-soft: #eff6ff;
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  --radius-sm: 12px;
+  --shadow-card: 0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,54 +26,343 @@
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
-  background-color: #f8fafc;
-  color: #0f172a;
+  background-color: var(--bg-page);
+  color: var(--text-main);
   min-height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
+  flex-direction: column;
 }
 
-/* 첫 화면(index.html) 레이아웃 */
-.container {
+/* 공통 상단 헤더 */
+.site-header {
+  background-color: var(--bg-card);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.header-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-main);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+}
+
+.brand-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  display: inline-block;
+}
+
+/* 공통 본문 컨테이너 (가운데 정렬, 최대 너비 960px) */
+.main-container {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 공통 버튼 */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2.25rem;
+  background-color: var(--accent);
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.25);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--accent-hover);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.btn-primary:disabled {
+  background-color: #cbd5e1;
+  color: #64748b;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   시작 화면 (index.html)
+   ========================================================================== */
+.home-main {
+  justify-content: space-between;
+  gap: 2.5rem;
+}
+
+.hero-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 3rem 2rem;
   text-align: center;
-  padding: 2rem 1rem;
+  box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
-h1 {
-  font-size: 1.875rem;
+.hero-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+.hero-desc {
+  font-size: 1.1rem;
+  color: var(--text-sub);
+  line-height: 1.5;
+  max-width: 520px;
+}
+
+.hero-actions {
+  margin-top: 0.5rem;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.step-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.5rem 1.25rem;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.step-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background-color: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 800;
+  font-size: 1rem;
+}
+
+.step-title {
+  font-size: 1.15rem;
   font-weight: 700;
+  color: var(--text-main);
 }
 
-.nav-link {
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  background-color: #2563eb;
-  color: #ffffff;
-  text-decoration: none;
-  font-weight: 600;
-  border-radius: 12px;
-  transition: background-color 0.15s ease;
+.step-desc {
+  font-size: 0.95rem;
+  color: var(--text-sub);
+  line-height: 1.45;
 }
 
-.nav-link:hover {
-  background-color: #1d4ed8;
+.home-footer {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding-top: 0.5rem;
 }
 
-/* 인식 테스트 화면(test.html) 레이아웃 */
+.footer-link {
+  font-size: 0.875rem;
+  color: var(--text-sub);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.footer-link:hover {
+  color: var(--accent);
+}
+
+.footer-notice {
+  font-size: 0.825rem;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   계산 화면 (scan.html)
+   ========================================================================== */
+.scan-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.kiosk-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.card-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+/* 정사각형 카메라 미리보기 (가운데 부분 크롭 + 거울 모드) */
+.camera-section {
+  display: flex;
+  justify-content: center;
+}
+
+.camera-box {
+  width: 100%;
+  max-width: 380px;
+  aspect-ratio: 1 / 1;
+  background-color: #0f172a;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 2px solid var(--border-color);
+}
+
+.camera-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Teachable Machine 학습 방향과 맞추기 위한 거울 모드 */
+  transform: scaleX(-1);
+  display: block;
+}
+
+/* 계산 화면 인식 상태 한 줄 */
+.scan-status-line {
+  text-align: center;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-soft);
+  border: 1px solid var(--border-color);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.scan-status-line[data-state="detected"] {
+  background-color: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.scan-status-line[data-state="error"] {
+  background-color: #fef2f2;
+  border-color: #fecaca;
+  color: #b91c1c;
+}
+
+/* 장바구니 영역 */
+.cart-card {
+  min-height: 420px;
+  justify-content: space-between;
+}
+
+.cart-body {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-soft);
+  border: 1px dashed #cbd5e1;
+  border-radius: var(--radius-md);
+  padding: 2rem 1rem;
+}
+
+.cart-empty-text {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.cart-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.cart-total-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cart-total-label {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-sub);
+}
+
+.cart-total-amount {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.cart-pay-btn {
+  width: 100%;
+}
+
+/* ==========================================================================
+   인식 테스트 화면 (test.html)
+   ========================================================================== */
+.test-main {
+  align-items: center;
+}
+
 .test-page {
   width: 100%;
   max-width: 480px;
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 20px;
-  padding: 1.25rem;
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -68,14 +377,15 @@ h1 {
 
 .test-header h1 {
   font-size: 1.35rem;
+  font-weight: 800;
 }
 
 .back-link {
   font-size: 0.9rem;
   font-weight: 600;
-  color: #475569;
+  color: var(--text-sub);
   text-decoration: none;
-  padding: 0.4rem 0.65rem;
+  padding: 0.4rem 0.75rem;
   border-radius: 8px;
   background-color: #f1f5f9;
 }
@@ -108,31 +418,6 @@ h1 {
 .status-badge[data-status="error"] {
   background-color: #fee2e2;
   color: #b91c1c;
-}
-
-/* 정사각형 카메라 미리보기 (가운데 부분 크롭 + 거울 모드) */
-.camera-section {
-  display: flex;
-  justify-content: center;
-}
-
-.camera-box {
-  width: 100%;
-  max-width: 340px;
-  aspect-ratio: 1 / 1;
-  background-color: #0f172a;
-  border-radius: 16px;
-  overflow: hidden;
-  border: 2px solid #e2e8f0;
-}
-
-.camera-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  /* Teachable Machine 학습 방향과 맞추기 위한 거울 모드 */
-  transform: scaleX(-1);
-  display: block;
 }
 
 /* 오류 안내 박스 */
@@ -189,8 +474,8 @@ h1 {
   text-align: center;
   padding: 0.9rem;
   font-size: 0.9rem;
-  color: #64748b;
-  background-color: #f8fafc;
+  color: var(--text-muted);
+  background-color: var(--bg-soft);
   border-radius: 10px;
 }
 
@@ -201,15 +486,14 @@ h1 {
   gap: 0.65rem;
   padding: 0.6rem 0.75rem;
   border-radius: 12px;
-  background-color: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background-color: var(--bg-soft);
+  border: 1px solid var(--border-color);
   transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 
-/* 가장 확률이 높은 클래스 강조 */
 .prediction-item.is-top {
-  background-color: #eff6ff;
-  border-color: #2563eb;
+  background-color: var(--accent-soft);
+  border-color: var(--accent);
   box-shadow: 0 2px 8px rgba(37, 99, 235, 0.12);
 }
 
@@ -223,14 +507,14 @@ h1 {
 }
 
 .prediction-item.is-top .prediction-name {
-  color: #1d4ed8;
+  color: var(--accent-hover);
   font-weight: 700;
 }
 
 .prediction-bar-track {
   width: 100%;
   height: 12px;
-  background-color: #e2e8f0;
+  background-color: var(--border-color);
   border-radius: 999px;
   overflow: hidden;
 }
@@ -244,27 +528,56 @@ h1 {
 }
 
 .prediction-item.is-top .prediction-bar-fill {
-  background-color: #2563eb;
+  background-color: var(--accent);
 }
 
 .prediction-percent {
   text-align: right;
   font-size: 0.9rem;
   font-weight: 600;
-  color: #475569;
+  color: var(--text-sub);
   font-variant-numeric: tabular-nums;
 }
 
 .prediction-item.is-top .prediction-percent {
-  color: #1d4ed8;
+  color: var(--accent-hover);
   font-weight: 700;
 }
 
-/* 375px 이하 모바일 화면 대응 */
+/* ==========================================================================
+   반응형 (모바일 / 태블릿)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .main-container {
+    padding: 1.25rem 1rem;
+  }
+
+  .hero-card {
+    padding: 2rem 1.25rem;
+  }
+
+  .hero-title {
+    font-size: 1.65rem;
+  }
+
+  .steps-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .scan-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .cart-card {
+    min-height: auto;
+  }
+}
+
 @media (max-width: 400px) {
-  .test-page {
+  .test-page,
+  .kiosk-card {
     padding: 1rem;
-    border-radius: 16px;
+    border-radius: var(--radius-md);
   }
 
   .prediction-item {

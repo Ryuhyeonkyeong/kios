@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>계산하기 - Tina' 마트 무인 계산대</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- 공통 상단 헤더 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand-link" href="index.html">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span>Tina' 마트</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- 계산 화면 본문 (넓은 화면: 좌우 나란히, 모바일: 위아래 쌓기) -->
+  <main class="main-container">
+    <div class="scan-layout">
+      <!-- 왼쪽: 카메라 인식 영역 -->
+      <section class="kiosk-card" aria-label="상품 인식 카메라">
+        <h1 class="card-title">상품 스캔</h1>
+        <div class="camera-section">
+          <div class="camera-box">
+            <video id="scanVideo" class="camera-video" playsinline muted autoplay></video>
+          </div>
+        </div>
+        <div id="scanStatusLine" class="scan-status-line" data-state="idle" role="status" aria-live="polite">
+          모델 불러오는 중...
+        </div>
+      </section>
+
+      <!-- 오른쪽: 장바구니 영역 -->
+      <section class="kiosk-card cart-card" aria-label="장바구니">
+        <h2 class="card-title">장바구니</h2>
+        <div class="cart-body">
+          <p class="cart-empty-text">아직 담은 상품이 없어요</p>
+        </div>
+        <div class="cart-footer">
+          <div class="cart-total-row">
+            <span class="cart-total-label">합계</span>
+            <span class="cart-total-amount">0원</span>
+          </div>
+          <button type="button" class="btn-primary cart-pay-btn" disabled>결제하기</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Teachable Machine 이미지 모델 실행에 필요한 라이브러리 (주소와 버전 유지) -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.5/dist/teachablemachine-image.min.js"></script>
+  <!-- 상품 가격표 및 도우미 함수 -->
+  <script src="js/products.js"></script>
+  <!-- 카메라와 AI 모델 제어 모듈 -->
+  <script src="js/recognizer.js"></script>
+  <!-- 계산 화면 전용 스크립트 -->
+  <script src="js/scan.js"></script>
+</body>
+</html>
