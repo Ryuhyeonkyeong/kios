@@ -26,6 +26,14 @@
         <div class="camera-section">
           <div class="camera-box">
             <video id="scanVideo" class="camera-video" playsinline muted autoplay></video>
+            <!-- 상품이 담겼을 때 1.5초 동안 크게 보여주는 안내 배너 -->
+            <div id="addedBanner" class="added-banner" hidden aria-live="assertive"></div>
+          </div>
+        </div>
+        <!-- 유지 시간 동안 0% ~ 100% 차오르는 진행 막대 -->
+        <div id="holdProgressWrap" class="hold-progress-wrap" hidden aria-label="인식 유지 진행률">
+          <div class="hold-progress-track">
+            <div id="holdProgressFill" class="hold-progress-fill"></div>
           </div>
         </div>
         <div id="scanStatusLine" class="scan-status-line" data-state="idle" role="status" aria-live="polite">
@@ -36,15 +44,20 @@
       <!-- 오른쪽: 장바구니 영역 -->
       <section class="kiosk-card cart-card" aria-label="장바구니">
         <h2 class="card-title">장바구니</h2>
-        <div class="cart-body">
-          <p class="cart-empty-text">아직 담은 상품이 없어요</p>
+        <div id="cartBody" class="cart-body">
+          <p id="cartEmptyText" class="cart-empty-text">아직 담은 상품이 없어요</p>
+          <ul id="cartList" class="cart-list" hidden></ul>
         </div>
         <div class="cart-footer">
+          <div class="cart-summary-row">
+            <span class="cart-summary-label">총 수량</span>
+            <span id="cartTotalCount" class="cart-summary-value">0개</span>
+          </div>
           <div class="cart-total-row">
             <span class="cart-total-label">합계</span>
-            <span class="cart-total-amount">0원</span>
+            <span id="cartTotalAmount" class="cart-total-amount">0원</span>
           </div>
-          <button type="button" class="btn-primary cart-pay-btn" disabled>결제하기</button>
+          <button id="payButton" type="button" class="btn-primary cart-pay-btn" disabled>결제하기</button>
         </div>
       </section>
     </div>
@@ -53,9 +66,11 @@
   <!-- Teachable Machine 이미지 모델 실행에 필요한 라이브러리 (주소와 버전 유지) -->
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.5/dist/teachablemachine-image.min.js"></script>
-  <!-- 상품 가격표 및 도우미 함수 -->
+  <!-- 설정, 상품 가격표, 판정 규칙, 장바구니, 카메라 모듈 -->
+  <script src="js/config.js"></script>
   <script src="js/products.js"></script>
-  <!-- 카메라와 AI 모델 제어 모듈 -->
+  <script src="js/judge.js"></script>
+  <script src="js/cart.js"></script>
   <script src="js/recognizer.js"></script>
   <!-- 계산 화면 전용 스크립트 -->
   <script src="js/scan.js"></script>
