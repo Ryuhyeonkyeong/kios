@@ -67,10 +67,15 @@
     return numericPrice.toLocaleString('ko-KR') + '원';
   }
 
-  // 다른 스크립트에서 불러와 쓸 수 있도록 전역 객체에 등록합니다.
-  global.ProductCatalog = {
+  // 브라우저 환경과 Node.js 테스트 환경 모두에서 사용할 수 있도록 내보냅니다.
+  const ProductCatalog = {
     PRODUCTS: PRODUCTS,
     findProductByClassName: findProductByClassName,
     formatPrice: formatPrice
   };
-})(window);
+
+  global.ProductCatalog = ProductCatalog;
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports = ProductCatalog;
+  }
+})(typeof window !== 'undefined' ? window : globalThis);
