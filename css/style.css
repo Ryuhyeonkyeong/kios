@@ -12,14 +12,264 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1rem;
 }
 
+/* 첫 화면(index.html) 레이아웃 */
 .container {
   text-align: center;
-  padding: 2rem;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: 1.875rem;
   font-weight: 700;
+}
+
+.nav-link {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: #2563eb;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 12px;
+  transition: background-color 0.15s ease;
+}
+
+.nav-link:hover {
+  background-color: #1d4ed8;
+}
+
+/* 인식 테스트 화면(test.html) 레이아웃 */
+.test-page {
+  width: 100%;
+  max-width: 480px;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 1.25rem;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.test-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.test-header h1 {
+  font-size: 1.35rem;
+}
+
+.back-link {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #475569;
+  text-decoration: none;
+  padding: 0.4rem 0.65rem;
+  border-radius: 8px;
+  background-color: #f1f5f9;
+}
+
+.back-link:hover {
+  background-color: #e2e8f0;
+}
+
+/* 상태 안내 배지 */
+.status-badge {
+  text-align: center;
+  padding: 0.6rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  background-color: #e0f2fe;
+  color: #0369a1;
+}
+
+.status-badge[data-status="requesting-camera"] {
+  background-color: #fef3c7;
+  color: #b45309;
+}
+
+.status-badge[data-status="running"] {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.status-badge[data-status="error"] {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+/* 정사각형 카메라 미리보기 (가운데 부분 크롭 + 거울 모드) */
+.camera-section {
+  display: flex;
+  justify-content: center;
+}
+
+.camera-box {
+  width: 100%;
+  max-width: 340px;
+  aspect-ratio: 1 / 1;
+  background-color: #0f172a;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 2px solid #e2e8f0;
+}
+
+.camera-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Teachable Machine 학습 방향과 맞추기 위한 거울 모드 */
+  transform: scaleX(-1);
+  display: block;
+}
+
+/* 오류 안내 박스 */
+.error-box {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 14px;
+  padding: 1rem;
+  color: #7f1d1d;
+}
+
+.error-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.error-reason {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+
+.error-solutions {
+  padding-left: 1.2rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* 클래스별 확률 막대 목록 */
+.prediction-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #334155;
+}
+
+.prediction-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.prediction-empty {
+  text-align: center;
+  padding: 0.9rem;
+  font-size: 0.9rem;
+  color: #64748b;
+  background-color: #f8fafc;
+  border-radius: 10px;
+}
+
+.prediction-item {
+  display: grid;
+  grid-template-columns: 76px 1fr 48px;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 12px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+/* 가장 확률이 높은 클래스 강조 */
+.prediction-item.is-top {
+  background-color: #eff6ff;
+  border-color: #2563eb;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.12);
+}
+
+.prediction-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1e293b;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.prediction-item.is-top .prediction-name {
+  color: #1d4ed8;
+  font-weight: 700;
+}
+
+.prediction-bar-track {
+  width: 100%;
+  height: 12px;
+  background-color: #e2e8f0;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.prediction-bar-fill {
+  height: 100%;
+  width: 0%;
+  background-color: #94a3b8;
+  border-radius: 999px;
+  transition: width 0.1s linear, background-color 0.15s ease;
+}
+
+.prediction-item.is-top .prediction-bar-fill {
+  background-color: #2563eb;
+}
+
+.prediction-percent {
+  text-align: right;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #475569;
+  font-variant-numeric: tabular-nums;
+}
+
+.prediction-item.is-top .prediction-percent {
+  color: #1d4ed8;
+  font-weight: 700;
+}
+
+/* 375px 이하 모바일 화면 대응 */
+@media (max-width: 400px) {
+  .test-page {
+    padding: 1rem;
+    border-radius: 16px;
+  }
+
+  .prediction-item {
+    grid-template-columns: 64px 1fr 44px;
+    gap: 0.5rem;
+    padding: 0.55rem 0.65rem;
+  }
 }

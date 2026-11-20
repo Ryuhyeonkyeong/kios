@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>인식 테스트 - Tina's 마트 무인 계산대</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <main class="test-page">
+    <header class="test-header">
+      <a class="back-link" href="index.html">← 처음으로</a>
+      <h1>인식 테스트</h1>
+    </header>
+
+    <!-- 현재 상태를 알려주는 배지 -->
+    <div id="statusBadge" class="status-badge" data-status="loading-model" role="status" aria-live="polite">
+      모델 불러오는 중...
+    </div>
+
+    <!-- 카메라 영상을 가운데 정사각형으로 보여주는 영역 -->
+    <section class="camera-section" aria-label="카메라 미리보기">
+      <div class="camera-box">
+        <video id="cameraVideo" class="camera-video" playsinline muted autoplay></video>
+      </div>
+    </section>
+
+    <!-- 카메라 또는 모델 오류 발생 시 이유와 해결 방법을 보여주는 영역 -->
+    <section id="errorBox" class="error-box" hidden aria-live="assertive">
+      <h2 id="errorTitle" class="error-title"></h2>
+      <p id="errorReason" class="error-reason"></p>
+      <ul id="errorSolutions" class="error-solutions"></ul>
+    </section>
+
+    <!-- 모델에서 읽어 온 모든 클래스의 확률 막대와 퍼센트를 보여주는 영역 -->
+    <section class="prediction-section" aria-label="상품 인식 확률">
+      <h2 class="section-title">인식 확률</h2>
+      <ul id="predictionList" class="prediction-list">
+        <li class="prediction-empty">모델의 클래스 목록을 불러오는 중입니다...</li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Teachable Machine 이미지 모델 실행에 필요한 라이브러리 (주소와 버전 유지) -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.5/dist/teachablemachine-image.min.js"></script>
+  <!-- 카메라와 AI 모델 제어 모듈 -->
+  <script src="js/recognizer.js"></script>
+  <!-- 인식 테스트 화면 전용 스크립트 -->
+  <script src="js/test.js"></script>
+</body>
+</html>
